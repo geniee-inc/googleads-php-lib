@@ -263,18 +263,14 @@ abstract class AdsSoapClient extends SoapClient {
 
     try {
       $this->GetLastResponseDom();
-      throw new DOMException();
     } catch (DOMException $domException) {
-//      trigger_error('Failed to load response into DOM: '
-//          . $domException->getMessage(), E_USER_NOTICE);
       throw $domException;
     }
 
     try {
       $this->GetLastRequestDom();
     } catch (DOMException $domException) {
-      trigger_error('Failed to load request into DOM: '
-          . $domException->getMessage(), E_USER_NOTICE);
+      throw $domException;
     }
 
     $level = isset($e) ? Logger::$ERROR : Logger::$INFO;
